@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Gráficos</title>
+    <style>
+        /* Estilos básicos para a dashboard */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;  /* Cor de fundo externa neutra */
+        }
+
+        /* Estilo para as barras laterais e horizontais fixas */
+        .side-bars, .top-bar, .bottom-bar {
+            background-color: white;  /* Cor branca para as barras */
+            z-index: 1;  /* Garantir que as barras fiquem acima do conteúdo */
+        }
+
+        /* Barras verticais laterais */
+        .side-bars {
+            position: fixed;
+            top: 0;
+            width: 5%;  /* Ajuste a largura das barras laterais */
+            height: 100vh;  /* Altura de 100% da viewport */
+        }
+
+        .left-bar {
+            left: 0;
+        }
+
+        .right-bar {
+            right: 0;
+        }
+
+        /* Barras horizontais (no início e fim da página) */
+        .top-bar, .bottom-bar {
+            width: 100%;  /* As barras horizontais ocupam toda a largura da página */
+            height: 40px;  /* Altura das barras horizontais reduzida */
+            background-color: white;  /* Cor branca */
+        }
+
+        /* Ajuste para o conteúdo principal com fundo verde arredondado */
+        .container-wrapper {
+            margin: 20px auto;  /* Espaçamento para as barras laterais */
+            width: 85%;  /* Reduz a largura do conteúdo verde */
+            max-width: 1100px;  /* Ajuste para telas grandes */
+            background-color: #08ac74;  /* Cor de fundo verde */
+            border-radius: 25px;  /* Bordas arredondadas */
+            padding: 20px;
+            box-shadow: 0px 0px 0px 0px white;  /* Remover sombra acinzentada e substituir por branco */
+            position: relative;
+            z-index: 0;  /* Fica atrás das barras */
+        }
+
+        /* Estilo para o cabeçalho com logo e título */
+        .header {
+            display: flex;  /* Usar flexbox para alinhar items horizontalmente */
+            justify-content: space-between;  /* Espaçar logo e título */
+            align-items: center;  /* Centralizar verticalmente */
+            padding: 10px;  /* Espaçamento interno */
+        }
+
+        h1 {
+            color: white;  /* Cor do texto branco para o título principal */
+            margin: 0;  /* Remove margem padrão */
+            text-align: center;
+            flex-grow: 1;  /* Faz o h1 ocupar o espaço disponível */
+        }
+
+        /* Estilo para o logo */
+        .logoMenu {
+            width: 150px; /* Ajuste o tamanho conforme necessário */
+        }
+
+        h2 {
+            text-align: center;
+            color: #4f4f4f;  /* Cor cinza para os títulos h2 */
+        }
+
+        /* Estilo para os contêineres arredondados */
+        .rounded-container {
+            background-color: white;  /* Fundo branco para destacar */
+            border-radius: 15px;  /* Bordas arredondadas */
+            padding: 20px;  /* Espaçamento interno */
+            margin-bottom: 40px;  /* Espaçamento entre os blocos */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        }
+
+        .chart-container {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap; /* Permite que os gráficos se ajustem em múltiplas linhas */
+            justify-content: space-between; /* Espaço entre os gráficos */
+        }
+
+        /* Estilo para os gráficos */
+        iframe {
+            width: 49%;  /* Largura adaptável */
+            height: 520px; /* Altura fixa */
+            border: none;
+            min-width: 300px; /* Largura mínima para os iframes */
+        }
+
+        /* Para gráficos sozinhos */
+        .full-width {
+            width: 100%;
+            height: 600px; /* Altura fixa para gráficos sozinhos */
+        }
+
+        /* Responsividade para telas menores */
+        @media screen and (max-width: 768px) {
+            iframe {
+                width: 100%; /* Ocupa toda a largura */
+                height: 400px; /* Ajusta a altura para telas menores */
+            }
+
+            .chart-container {
+                justify-content: center; /* Centraliza os gráficos horizontalmente */
+                flex-wrap: wrap; /* Permite que os gráficos se ajustem em múltiplas linhas */
+                gap: 20px; /* Espaçamento entre os gráficos */
+            }
+
+            .side-bars {
+                display: none;  /* Esconder as barras em telas menores */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra horizontal superior no início da página -->
+    <div class="top-bar"></div>
+
+    <!-- Barra lateral esquerda fixa -->
+    <div class="side-bars left-bar"></div>
+
+    <!-- Barra lateral direita fixa -->
+    <div class="side-bars right-bar"></div>
+
+    <!-- Conteúdo principal com fundo verde arredondado -->
+    <div class="container-wrapper">
+        <!-- Cabeçalho com logo e título -->
+        <div class="header">
+            <img src="https://esf.org.br/assets/logoBranca-bXGrg4s0.svg" alt="Logo ESF" class="logoMenu">
+            <h1>Dashboard de Gráficos</h1>
+        </div>
+
+        <!-- Mapa de Situação dos Núcleos (ficando sozinho) -->
+        <div class="rounded-container">
+            <h2>Mapa de Situação dos Núcleos</h2>
+            <iframe src="content/mapa_situacao_nucleos.html" class="full-width" title="Mapa de Situação dos Núcleos"></iframe>
+        </div>
+
+        <!-- Gráfico Donut de Despesas e Receitas lado a lado -->
+        <div class="rounded-container">
+            <h2>Receitas e Despesas</h2>
+            <div class="chart-container">
+                <iframe src="content/Donut_receitas.html" title="Donut Receitas"></iframe>
+                <iframe src="content/Donut_despesas.html" title="Donut Despesas"></iframe>
+            </div>
+        </div>
+
+        <!-- Gráfico de Entradas e Saídas ao Longo do Ano lado a lado -->
+        <div class="rounded-container">
+            <h2>Entradas e Saídas</h2>
+            <div class="chart-container">
+                <iframe src="content/Entradas_ao_longo_do_ano.html" title="Entradas ao Longo do Ano"></iframe>
+                <iframe src="content/Saidas_ao_longo_do_ano.html" title="Saídas ao Longo do Ano"></iframe>
+            </div>
+        </div>
+
+        <!-- Gráfico de Performance ao Longo do Ano (ficando sozinho no final) -->
+        <div class="rounded-container">
+            <h2>Performance ao Longo do Ano</h2>
+            <iframe src="content/Performance_ao_longo_do_ano.html" class="full-width" title="Performance ao Longo do Ano"></iframe>
+        </div>
+
+    </div>
+
+    <!-- Barra horizontal inferior no final da página -->
+    <div class="bottom-bar"></div>
+
+</body>
+</html>
